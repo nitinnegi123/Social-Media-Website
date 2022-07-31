@@ -1,3 +1,4 @@
+const { application } = require('express');
 const express=require('express');
 const router=express.Router()
 console.log('STARTED');
@@ -6,6 +7,8 @@ router.get('/',homeController.home);
 router.use('/users',require('./users'))
 //for any another routes access from here
 //router.use('./routerName',require('./routerfield'))
+
+
 
 
 
