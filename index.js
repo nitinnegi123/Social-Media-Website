@@ -3,6 +3,7 @@ const app=express();
 const expressLayouts=require('express-ejs-layouts');
 app.use(expressLayouts);//tell befoore layout is using
 const port=8000;
+const db=require('./config/mongoose');
 //to use before view
 app.use(express.static('./assests'));
 //extract style and scripts from sub pages to layout
