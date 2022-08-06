@@ -1,8 +1,13 @@
 const express=require('express');
 const app=express();
+const bodyParser = require('body-parser')
+const cookieParser=require('cookie-parser');
 const expressLayouts=require('express-ejs-layouts');
 app.use(expressLayouts);//tell befoore layout is using
 const port=8000;
+app.use(bodyParser.urlencoded({extended: false}))
+//using cookir parser first install it
+app.use(cookieParser());
 const db=require('./config/mongoose');
 //to use before view
 app.use(express.static('./assests'));
