@@ -7,3 +7,4 @@ module.exports.home=(req,res)=>
         title:"home"
     })
 }
+// module.exports.actionName = function(req, res){}
