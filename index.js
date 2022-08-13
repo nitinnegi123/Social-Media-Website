@@ -12,6 +12,7 @@ const session = require('express-session');
 //handling authentication
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const MongoStore=require('connect-mongo');//install library before using it
 app.use(bodyParser.urlencoded({extended: false}))
 //using cookir parser first install it
 app.use(cookieParser());
@@ -22,14 +23,7 @@ app.use(expressLayouts);//tell befoore layout is using
 // extract style and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
-
-
-
-
-// set up the view engine
-app.set('view engine', 'ejs');
-app.set('views', './views');
-
+//mongo store is used to store the session cookie in the db
 
 app.use(session({
     name: 'codeial',
@@ -39,11 +33,29 @@ app.use(session({
     resave: false,//if session is saved then dont want rewrite
     cookie: {
         maxAge: (1000 * 60 * 100)
-    }
+    },
+    store:MongoStore.create(
+        {
+            mongoUrl:'mongodb://localhost/codeial_development',
+            autoRemove:'disabled'
+        },
+        function(err)
+        {
+            console.log(err||'connect-mogodb setup ok')
+
+        }
+    )
+
+
 }));
-//app to use passport and passport session passport also has session
+//tell app to use passport and passport session passport also has session helps to mainatning the session
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser)
+// set up the view engine
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
 
 // use express router
 app.use('/', require('./routes'));
