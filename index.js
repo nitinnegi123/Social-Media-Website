@@ -13,6 +13,17 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const MongoStore=require('connect-mongo');//install library before using it
+const sassMiddleware=require('node-sass-middleware');
+app.use(sassMiddleware(
+    {
+        src:'./assets/scss',//remenber./
+        dest:'./assets/css',
+        debug:true,//showing error while comiling into css,
+        outputStyle:'extended',//multiple lines or single elines
+        prefix:'/css'
+    }
+));//rember the position
+
 app.use(bodyParser.urlencoded({extended: false}))
 //using cookir parser first install it
 app.use(cookieParser());
@@ -21,6 +32,7 @@ app.use(express.static('./assets'));
 
 app.use(expressLayouts);//tell befoore layout is using
 // extract style and scripts from sub pages into the layout
+
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 //mongo store is used to store the session cookie in the db

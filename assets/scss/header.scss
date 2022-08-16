@@ -1,0 +1,28 @@
+
+#header{
+    height:auto;
+    width: 100%;
+    border: 1px solid grey;
+    display: flex;
+    justify-content: space-between;
+    background-color: darkblue;
+    
+    #heading
+    {
+         color: white;
+         margin-left: 1.5rem;
+    }
+    ul{
+        list-style: none;
+        display: flex;
+        margin-right: 1.5rem;
+        li{
+            margin:5px;
+            
+            a{
+                color: white;
+                text-decoration: none;
+            }
+        }
+    }
+}

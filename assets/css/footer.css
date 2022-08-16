@@ -1,0 +1,19 @@
+footer {
+  height: auto;
+  width: 100%;
+  background-color: grey;
+  display: flex;
+  justify-content: flex-start; }
+  footer #footer-content {
+    color: white;
+    font-family: sans-serif;
+    word-spacing: 2px; }
+  footer section {
+    display: flex;
+    flex-direction: column;
+    vertical-align: text-bottom;
+    margin-top: 1rem;
+    margin-left: 2rem; }
+    footer section a {
+      text-decoration: none;
+      color: white; }
