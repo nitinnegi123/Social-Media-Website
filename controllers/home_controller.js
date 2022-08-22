@@ -1,3 +1,4 @@
+const { populate } = require('../models/post')
 const Post=require('../models/post')
 const { post } = require('../routes/posts')
 module.exports.home=(req,res)=>
@@ -13,7 +14,17 @@ module.exports.home=(req,res)=>
 //         })
 //    })
 //when query get longer use exec for callback
-   Post.find({}).populate('user').exec(function(err,posts)
+//when populating two models at a time we use this preloading comments and user
+   Post.find({})
+   .populate('user')
+   .populate(
+    {
+        path:'comments',
+        populate:{
+            path:'user'
+        }
+    }
+   ).exec(function(err,posts)
    {
         return res.render('home',
         {
