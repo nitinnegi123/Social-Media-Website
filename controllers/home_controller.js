@@ -1,6 +1,7 @@
 const { populate } = require('../models/post')
 const Post=require('../models/post')
 const { post } = require('../routes/posts')
+const User=require('../models/user');
 module.exports.home=(req,res)=>
 {
     // res.cookie('user_id',25);//chnaging at response
@@ -25,12 +26,24 @@ module.exports.home=(req,res)=>
         }
     }
    ).exec(function(err,posts)
-   {
-        return res.render('home',
+   {    
+        if(err)
         {
+            console.log('error in finding post')
+            return res.redirect('/');
+        }
+        User.find({},function(err,users)
+        {
+            return res.render('home',
+            {
             title:"home",
-            posts:posts
+            posts:posts,
+            all_users:users
+            })
+
+
         })
+        
    })
 }
 // module.exports.actionName = function(req, res){}

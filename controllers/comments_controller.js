@@ -30,3 +30,29 @@ module.exports.create=function(req,res)
 
     })
 }
+module.exports.destroy=function(req,res)
+{
+    Comment.findById(req.params.id,function(err,comment)
+    {
+        if(err)
+        {
+            console.log('enable to find id');
+        }
+        if(comment)
+        {
+                let postId=comment.post;
+                comment.remove();//before removing we have to remove comment in post otherwisw we have no trace of comments in post
+
+                Post.findByIdAndUpdate(postId,{$pull:{comments:req.params.id}},function(err,post)
+                {
+                    if(err)
+                    {
+                        console.log('error in finding comment')
+                    }
+                    res.redirect('back');
+                });
+
+            
+        }
+    })
+}
