@@ -41,6 +41,7 @@ module.exports.create=async function(req,res)
                 //first we do updation so save it after every update
                 post.comments.push(comment);
                 post.save();
+                req.flash('success','comment added')
                 res.redirect('/');
         }
     }catch(e)
@@ -81,6 +82,8 @@ module.exports.destroy=async function(req,res)
         comment.remove();//before removing we have to remove comment in post otherwisw we have no trace of comments in post
 
         let post=await Post.findByIdAndUpdate(postId,{$pull:{comments:req.params.id}})
+        post.save();
+        req.flash('error','comment deleted')
         res.redirect('back');
     } 
    }

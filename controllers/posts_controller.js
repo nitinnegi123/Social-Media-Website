@@ -13,6 +13,7 @@ module.exports.create = function(req, res){
 
         
     });
+    req.flash('success','post created successfully')
     return res.redirect('back');
 }
 module.exports.destroy=async function(req,res)
@@ -47,14 +48,17 @@ module.exports.destroy=async function(req,res)
         if(post.user==req.user.id){
             post.remove();
             let comments=await Comment.deleteMany({post:req.params.id})
+            req.flash('success','post deleted succesfuuly')
             return res.redirect('back');
         }
         else
         {
+            req.flash('error','unable to delete post')
             return res.redirect('back');
         }
     }catch(e)
     {
+        req.flash('error','unable to delete post')
         console.log('error',e)
     }
 

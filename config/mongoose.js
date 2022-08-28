@@ -4,7 +4,7 @@ const db=mongoose.connection;
 db.on('error',console.error.bind(console,"error connecting to databse"));
 db.once('open',function()
 {
-    console.log('coonection to database::mongodb')
+    console.log('connection to database::mongodb')
 });
 module.exports=db;
 
