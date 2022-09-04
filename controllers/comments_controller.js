@@ -41,7 +41,22 @@ module.exports.create=async function(req,res)
                 //first we do updation so save it after every update
                 post.comments.push(comment);
                 post.save();
-             
+                // doubt comment=await comment.populate('user').exec(function(err,comment)
+                console.log(comment)
+                
+                if(req.xhr)
+                {
+                    comment=await comment.populate('user')
+                    return res.status(200).json(
+                        {
+                            data:{
+                                comment:comment
+
+                            },
+                            message:'comment created'
+                        }
+                    )
+                }
                 req.flash('success','comment added')
                 res.redirect('/');
         }
@@ -85,7 +100,20 @@ module.exports.destroy=async function(req,res)
         let post=await Post.findByIdAndUpdate(postId,{$pull:{comments:req.params.id}})
         post.save();
          // send the comment id which was deleted back to the views
-      
+        if(req.xhr)
+        {
+            return res.status(200).json(
+                {
+                    data:{
+                        comment_id:req.params.id
+
+                    },
+                    message:'comment created'
+                }
+            )
+
+
+        }
         req.flash('error','comment deleted')
         res.redirect('back');
     } 
