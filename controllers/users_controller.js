@@ -1,5 +1,7 @@
 const User = require('../models/user');
-
+const fs=require('fs');
+const path=require('path');
+const multer = require('multer');
 
 module.exports.profile = function(req, res){
     User.findById(req.params.id,function(err,user)
@@ -16,15 +18,66 @@ module.exports.profile = function(req, res){
    
 }
 
-module.exports.update = function(req, res){
-    if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
-            req.flash('success','users profile updated')
+module.exports.update = async function(req, res){
+    // if(req.user.id == req.params.id){
+    //     User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+    //         req.flash('success','users profile updated')
+    //         return res.redirect('back');
+    //     });
+    // }else{
+    //    req.flash('error','unauthorized')
+    //     return res.status(401).send('Unauthorized');
+    // }
+    //cannot access req.body beacuse of multipart
+    if(req.user.id === req.params.id){
+        try{
+            let user=await User.findById(req.params.id);
+            User.uploadedAvatar(req,res,function(err)
+            {
+                if(err)
+                {
+                    console.log('****multererror',err)
+                }
+            
+                //not able to read body untill multer is used beacuse we used multer
+                user.name=req.body.name;
+                user.email=req.body.email;
+                // if(req.file.size>1024*10)
+                // {
+                //     req.flash('error','file extended')
+                //     user.save();
+                //     return res.redirect('back');
+
+                // }
+                if(req.file)
+                {
+                    if(user.avatar)
+                    {
+                        if(fs.existsSync(path.join(__dirname,'..',user.avatar)))
+                        {
+                            fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                        }
+                    }
+                    //this is saving the path
+                    user.avatar=User.avatarPath+'/'+req.file.filename;
+                } 
+                user.save();
+                req.flash('success','users profile updated')
+                return res.redirect('back');
+            })
+            
+            
+        }catch(e)
+        {
+            req.flash('error',e);
             return res.redirect('back');
-        });
+
+        }
     }else{
+        req.flash('error','unauthorized');
         return res.status(401).send('Unauthorized');
     }
+
 }
 
 

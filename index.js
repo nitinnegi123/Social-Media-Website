@@ -31,6 +31,8 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser());
 //to use before view
 app.use(express.static('./assets'));
+//make the uploads path available to browser 
+app.use('/uploads',express.static(__dirname+'/uploads'))
 
 app.use(expressLayouts);//tell befoore layout is using
 // extract style and scripts from sub pages into the layout
@@ -72,6 +74,8 @@ app.use(customMware.setFlash);
 // set up the view engine
 app.set('view engine', 'ejs');
 app.set('views', './views');
+
+
 
 
 // use express router

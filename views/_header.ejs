@@ -11,8 +11,11 @@
         <div class="auth-links">
             <ul>
                 <% if (locals.user){ %>
+                    <li id="small-profile-image">
+                        <img src="<%=user.avatar%>" alt="<%=user.name%>">
+                    </li>
                 <li>
-                    <a href="/users/profile"><%= user.name %></a>
+                    <a href="/users/profile/<%=locals.user._id%>"><%= user.name %></a>
                 </li>
                 <li>
                     <a href="/users/sign-out">Sign Out</a>
