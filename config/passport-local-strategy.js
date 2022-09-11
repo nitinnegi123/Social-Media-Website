@@ -15,7 +15,6 @@ function(req,email, password, done){
              req.flash('error','invalid username and password')
             return done(err);
         }
-
         if (!user || user.password != password){
             console.log('Invalid Username/Password');
             req.flash('error','invalid username or password')
