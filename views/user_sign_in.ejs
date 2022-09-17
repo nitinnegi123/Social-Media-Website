@@ -1,8 +1,36 @@
-<h1>Sign In</h1>
+<link rel="stylesheet" href="/css/sign_in.css">
+<div id="sign-in-container">
+   <div>
+        <h1>
+            SIGN IN
+        </h1>
+   </div>
+   <div>
+        <form action="/users/create-session" method="POST">
+            <ul>
+                <li >
+                    <input class="size-li" type="email"name="email" placeholder="Email"  required>
+                </li>
+                <li >
+                    <input class="size-li" type="password" name="password" placeholder="Password"  required>
+                </li>
+                <li >
+                    <input class="submit-button size-li" type="submit" value="Sign In">
+                </li>
+                <li class="size-li google-logo">
+                    <span>
+                        <i class="fa-brands fa-google" ></i>
 
-<form action="/users/create-session" method="POST">
-    <input type="email" name="email" placeholder="Email"  required>
-    <input type="password" name="password" placeholder="Password"  required>
-    <input type="submit" value="Sign In">
+                    </span>
+                    <span>
+                        <a href="/users/auth/google">Sign in with google</a>
+                    </span>
+                    
+                    
+                </li>
+            </ul>
+        </form>
 
-</form>
+   </div>
+  
+</div>

@@ -1,0 +1,39 @@
+body {
+  background-color: lightcyan; }
+  body #sign-up-container {
+    max-width: 30%;
+    background-color: white;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem; }
+    body #sign-up-container h1 {
+      color: orange; }
+    body #sign-up-container form ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      list-style: none; }
+      body #sign-up-container form ul .size-li {
+        width: 200px;
+        margin-top: 20px; }
+      body #sign-up-container form ul .submit-button {
+        background-color: orange;
+        font-family: monospace;
+        font-weight: bold;
+        padding: 3px;
+        cursor: pointer; }
+      body #sign-up-container form ul .google-logo {
+        background-color: blue;
+        padding: 3px;
+        box-sizing: border-box; }
+        body #sign-up-container form ul .google-logo a {
+          text-decoration: none;
+          color: white;
+          margin-left: 15px; }
+        body #sign-up-container form ul .google-logo i {
+          background-color: white;
+          padding: 1px; }
