@@ -23,7 +23,6 @@ class PostComments{
 //creating comment
     creatingComment(postId){
         let pSelf=this;
-        console.log('hey')
         this.newCommentForm.submit(function(e)
         {
             

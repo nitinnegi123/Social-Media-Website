@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
   })
 //statics methods
 
-userSchema.statics.uploadedAvatar=multer({storage:storage,limits:{fileSize:1024*10}})
+userSchema.statics.uploadedAvatar=multer({storage:storage,limits:{fileSize:1024*100}})
 // fileFilter:function(req,file,cb)
 // {
 //     const fileSize = parseInt(req.headers["content-length"]);
